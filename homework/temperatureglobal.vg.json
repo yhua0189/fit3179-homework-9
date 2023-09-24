@@ -1,0 +1,35 @@
+
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 800,
+  "height": 450,
+  "title": "Temperature condition in Global",
+  "projection": {"type":"equalEarth"},
+  "layer":[
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/FIT3179/Vega-Lite/main/3_choropleth_map/js/ne_110m_admin_0_countries.topojson",
+        "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+      },
+      "transform": [
+        {
+          "lookup": "properties.NAME",
+          "from":{
+            "data": {
+              "url": "https://raw.githubusercontent.com/yhua0189/fit3179-homework-9/main/dataset/GlobalWeatherRepository.csv"
+            },
+            "key": "country",
+            "fields": ["temperature_celsius"]
+          }
+        }
+      ],
+      "mark": {"type": "geoshape"},
+      "encoding": {
+        "color":{
+          "field": "temperature_celsius",
+          "type": "quantitative"      
+        }
+      }
+    }
+  ]
+}
